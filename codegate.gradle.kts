@@ -57,6 +57,6 @@ tasks.register("codegate") {
         }
 
         logger.lifecycle("Opening CodeGate AI Pro on $projectPath")
-        run("/usr/bin/open", "-n", app.absolutePath, "--args", "--project", projectPath)
+        run("/usr/bin/open", "-n", "--env", "JAVA_HOME=${System.getProperty("java.home")}", app.absolutePath, "--args", "--project", projectPath)
     }
 }
