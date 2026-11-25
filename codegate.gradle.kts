@@ -57,6 +57,12 @@ tasks.register("codegate") {
         }
 
         logger.lifecycle("Opening CodeGate AI Pro on $projectPath")
-        run("/usr/bin/open", "-n", "--env", "JAVA_HOME=${System.getProperty("java.home")}", app.absolutePath, "--args", "--project", projectPath)
+                logger.lifecycle("Opening CodeGate AI Pro on $projectPath (logs below; quit the app to finish)")
+        val pb = ProcessBuilder(
+            File(app, "Contents/MacOS/CodeGateAIPro").absolutePath,
+            "--project", projectPath
+        ).inheritIO()
+        pb.environment()["JAVA_HOME"] = System.getProperty("java.home")
+        pb.start().waitFor()
     }
 }
