@@ -6,7 +6,7 @@ tasks.register("codegate") {
     group = "codegate"
     description = "Opens CodeGate AI Pro on this project (downloads it the first time)."
 
-    val version = (project.findProperty("codegate.version") as String?) ?: "1.0.0"
+    val version = (project.findProperty("codegate.version") as String?) ?: "1.0.2"
     val projectPath = project.rootDir.absolutePath
     notCompatibleWithConfigurationCache("downloads and launches an external app")
 
