@@ -58,11 +58,13 @@ tasks.register("codegate") {
 
         logger.lifecycle("Opening CodeGate AI Pro on $projectPath")
                 logger.lifecycle("Opening CodeGate AI Pro on $projectPath (logs below; quit the app to finish)")
-        val pb = ProcessBuilder(
+             val pb = ProcessBuilder(
             File(app, "Contents/MacOS/CodeGateAIPro").absolutePath,
             "--project", projectPath
-        ).inheritIO()
+        ).redirectErrorStream(true)
         pb.environment()["JAVA_HOME"] = System.getProperty("java.home")
-        pb.start().waitFor()
+        val proc = pb.start()
+        proc.inputStream.bufferedReader().forEachLine { println(it) }
+        proc.waitFor()
     }
 }
